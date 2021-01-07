@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
 import copy from "rollup-plugin-copy";
 import replace from "@rollup/plugin-replace";
+import styles from "rollup-plugin-styles";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -17,6 +18,7 @@ export default {
     replace({
       "process.env.NODE_ENV": JSON.stringify("production"),
     }),
+    styles({ modules: true, autoModules: true }),
     copy({ targets: [{ src: "public/*", dest: "dist/" }] }),
     typescript({ typescript: require("typescript") }),
     resolve({ extensions }),

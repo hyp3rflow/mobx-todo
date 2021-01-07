@@ -8,7 +8,7 @@ import serve from "rollup-plugin-serve";
 import livereload from "rollup-plugin-livereload";
 import copy from "rollup-plugin-copy";
 import replace from "@rollup/plugin-replace";
-import postcss from "rollup-plugin-postcss";
+import styles from "rollup-plugin-styles";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 process.env.BABEL_ENV = "production";
@@ -19,7 +19,7 @@ export default {
     replace({
       "process.env.NODE_ENV": JSON.stringify("development"),
     }),
-    postcss({ modules: true }),
+    styles({ modules: true, autoModules: true }),
     copy({ targets: [{ src: "public/*", dest: "dist/" }] }),
     typescript({ typescript: require("typescript") }),
     resolve({ extensions, browser: true }),
