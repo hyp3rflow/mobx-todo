@@ -9,7 +9,6 @@ import replace from "@rollup/plugin-replace";
 import styles from "rollup-plugin-styles";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
-
 process.env.BABEL_ENV = "production";
 
 export default {
@@ -21,7 +20,7 @@ export default {
     styles({ modules: true, autoModules: true }),
     copy({ targets: [{ src: "public/*", dest: "dist/" }] }),
     typescript({ typescript: require("typescript") }),
-    resolve({ extensions }),
+    resolve({ extensions, browser: true }),
     commonjs(),
     babel({
       extensions,
