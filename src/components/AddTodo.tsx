@@ -18,7 +18,9 @@ const AddTodo = () => {
       pinned: false,
     };
 
-    todoStore.pushTodo = todoObject;
+    setTodoTitle("");
+    setTodoContent("");
+    todoStore.pushTodo(todoObject);
   };
 
   return (
@@ -42,10 +44,9 @@ const AddTodo = () => {
 
 const Container = styled.div`
   padding: 20px;
-  border: 1px solid #888;
-  border-radius: 10px;
+  border-radius: 15px;
   background: #ffffff;
-  box-shadow: 10px 10px 20px #d9d9d9;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
 
   display: flex;
 `;
@@ -53,15 +54,29 @@ const Container = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  margin-right: 20px;
 `;
 
 const TitleInput = styled.input`
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 10px;
+
+  padding: 10px;
+
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
 `;
 
 const ContentInput = styled.input`
-  font-size: 20px;
+  font-size: 16px;
+
+  padding: 10px;
+
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
 `;
 
 const AddButton = styled.button`
@@ -72,6 +87,8 @@ const AddButton = styled.button`
   background-color: limegreen;
   font-weight: 600;
   color: white;
+
+  box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
 
   &:hover {
     background-color: white;
