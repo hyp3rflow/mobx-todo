@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import TodoStore, { ITodo } from "../store/TodoStore";
-import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
-import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import { GrClose } from "react-icons/gr";
-import { action } from "mobx";
+
+import TodoStore, { ITodo } from "../store/TodoStore";
+import TodoMeta from "./TodoMeta";
+import TodoContent from "./TodoContent";
 
 interface IProp {
   todo: ITodo;
@@ -15,26 +15,8 @@ const TodoItem = ({ todo }: IProp) => {
 
   return (
     <Container>
-      <MetaContainer>
-        <PinIcon
-          onClick={action(() =>
-            TodoStore.instance.changeTodoState({ id, pinned: !pinned })
-          )}
-        >
-          {pinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
-        </PinIcon>
-        <CheckIcon
-          onClick={() =>
-            TodoStore.instance.changeTodoState({ id, checked: !checked })
-          }
-        >
-          {checked ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
-        </CheckIcon>
-      </MetaContainer>
-      <ContentContainer checked={checked}>
-        <div>{title}</div>
-        <article>{content}</article>
-      </ContentContainer>
+      <TodoMeta id={id} pinned={pinned} checked={checked} />
+      <TodoContent checked={checked} title={title} content={content} />
       <CloseContainer onClick={() => TodoStore.instance.deleteTodo(id)}>
         <GrClose />
       </CloseContainer>
@@ -55,47 +37,6 @@ const Container = styled.div`
 
   &:last-child {
     margin-bottom: 20px;
-  }
-`;
-
-const MetaContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  margin-top: 3px;
-
-  align-items: center;
-`;
-
-interface ContentContainerProp {
-  checked: boolean;
-}
-
-const ContentContainer = styled.div<ContentContainerProp>`
-  display: flex;
-  flex-direction: column;
-
-  div {
-    line-height: 30px;
-    text-decoration-line: ${(p) => (p.checked ? "line-through" : "none")};
-    font-size: 20px;
-    font-weight: 600;
-  }
-`;
-
-const PinIcon = styled.div`
-  margin-left: 2px;
-
-  svg {
-    width: 23px;
-    height: 23px;
-  }
-`;
-
-const CheckIcon = styled.div`
-  svg {
-    width: 18px;
-    height: 18px;
   }
 `;
 
