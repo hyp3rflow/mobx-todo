@@ -8,7 +8,7 @@ const App = () => {
   return (
     <TopLayout>
       <TitleLayout>
-        <h1>Todo App</h1>
+        <Title>Todo App</Title>
         <AddTodo />
       </TitleLayout>
       <ItemContainer>
@@ -17,6 +17,10 @@ const App = () => {
     </TopLayout>
   );
 };
+
+const Title = styled.h1`
+  z-index: 20;
+`;
 
 const ItemContainer = styled.div`
   display: flex;
