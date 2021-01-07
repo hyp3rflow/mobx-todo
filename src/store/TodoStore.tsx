@@ -40,12 +40,9 @@ const initializeStore: ITodo[] = [
 
 class TodoStore {
   private static _instance: TodoStore;
-  todoList: ITodo[] = [];
 
-  constructor() {
+  constructor(private todoList = initializeStore) {
     makeAutoObservable(this);
-
-    this.todoList = initializeStore;
   }
 
   static get instance() {
@@ -62,7 +59,7 @@ class TodoStore {
     };
   }
 
-  set pushTodo(todo: ITodo) {
+  pushTodo(todo: ITodo) {
     this.todoList.push(todo);
   }
 
